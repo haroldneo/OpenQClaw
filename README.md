@@ -6,7 +6,7 @@
 
 > 根据社区反馈，目前 QClaw 临时阻断了当前版本直接调用无限量默认模型的 API，经尝试可通过**自定义模型**继续使用 OpenQClaw，测试确认可使用 **GLM-5、MiniMax M2.5、Qwen3.5** 等模型。
 >
-> `OpenQClaw Agent` 微信交流群已开放，欢迎扫码加入获取最新进展。`0.1.2` 版本更新和 Intel 版本适配正在处理中，即将发布。
+> OpenQClaw Agent 微信交流群已开放，欢迎扫码加入获取最新进展。0.1.2 版本更新和 Intel 版本适配正在处理中，即将发布。
 
 <p align="center">
   <img src="screenshots/openqclaw-agent-wechat-group-qrcode.png" width="260" alt="OpenQClaw Agent 微信交流群二维码" />
