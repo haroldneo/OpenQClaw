@@ -6,7 +6,7 @@
 
 > 根据社区反馈，目前 QClaw 临时阻断了当前版本直接调用无限量默认模型的 API，经尝试可通过**自定义模型**继续使用 OpenQClaw，测试确认可使用 **GLM-5、MiniMax M2.5、Qwen3.5** 等模型。
 >
-> OpenQClaw Agent 微信交流群已开放，欢迎扫码加入获取最新进展。0.1.2 版本更新和 Intel 版本适配正在处理中，即将发布。
+> OpenQClaw 0.1.2 已完成维护，现已同步提供 **Apple Silicon (arm64)** 和 **Intel (x64)** 版本，并去除了启动时“发现新版本”弹窗的强制拦截逻辑；即使不更新，也可以继续使用。
 
 <p align="center">
   <img src="screenshots/openqclaw-agent-wechat-group-qrcode.png" width="260" alt="OpenQClaw Agent 微信交流群二维码" />
@@ -54,22 +54,27 @@
 
 ## 🚀 使用方法
 
-1. 从 [Releases](https://github.com/haroldneo/OpenQClaw/releases) 下载 `OpenQClaw.app.zip`
-2. 解压后将 `OpenQClaw.app` 拖入 `/Applications`
+1. 从 [Releases](https://github.com/haroldneo/OpenQClaw/releases) 下载对应架构的安装包：
+   - Apple Silicon: `OpenQClaw-0.1.2-arm64.app.zip`
+   - Intel: `OpenQClaw-0.1.2-x64.app.zip`
+2. 解压后将 `OpenQClaw-0.1.2-*.app` 拖入 `/Applications`
 3. 首次打开如遇安全提示，前往 **系统设置 → 隐私与安全性** 点击「仍要打开」
 4. 微信扫码登录，即可开始使用 🎉
 
 ## 🔧 技术原理
 
-QClaw 基于 Electron 构建，前端邀请码验证逻辑位于 `app.asar` 内的 renderer 层：
+QClaw 基于 Electron 构建，前端邀请码验证与启动更新检测逻辑位于 `app.asar` 内的 renderer 层：
 
 1. **提取** `app.asar` 获取前端源码
-2. **定位** `Chat` 组件中的 `checkInviteCode` 调用和 `InviteCodeModal` 弹窗
-3. **Patch** 两处关键逻辑：
-   - `Chat.js` — 将邀请码状态 `isInviteVerified` 初始化为 `true`，跳过 API 校验
-   - `WXLoginView.js` — 将登录后的邀请码检查直接放行
-4. **移除** `Info.plist` 中的 `ElectronAsarIntegrity` 哈希校验
-5. **重新打包** asar 并 ad-hoc 签名
+2. **定位** `Chat` 组件中的 `checkInviteCode` 调用、`WXLoginView` 登录后校验，以及更新检测弹窗逻辑
+3. **Patch** 邀请码校验逻辑：
+   - `Chat` chunk — 将邀请码状态 `isInviteVerified` 初始化为 `true`，跳过 API 校验
+   - `WXLoginView` chunk — 将登录后的邀请码检查直接放行
+4. **Patch** 更新检测逻辑：
+   - 移除启动时自动执行的版本检查
+   - 将更新弹窗改为始终可关闭，不再因 `force` 策略阻止继续使用
+5. **移除** `Info.plist` 中的 `ElectronAsarIntegrity` 哈希校验
+6. **重新打包** asar 并 ad-hoc 签名
 
 整个过程由 [Amp](https://ampcode.com) Smart Mode (Claude Opus 4.6) 在 **~4 分钟内自动完成**。
 
