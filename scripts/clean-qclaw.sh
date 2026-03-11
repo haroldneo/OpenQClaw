@@ -31,14 +31,14 @@ PATHS=(
 )
 
 # 动态路径（/var/folders 中的缓存目录，因用户不同路径会变化）
-# 搜索所有可能匹配的 QClaw 缓存目录
+# 搜索所有可能匹配的 QClaw 缓存目录（统一一次 find，避免重复匹配）
+declare -A SEEN_PATHS
 while IFS= read -r -d '' dir; do
-    PATHS+=("$dir")
-done < <(find /var/folders -maxdepth 4 -type d -name "com.tencent.qclaw*" 2>/dev/null -print0)
-
-while IFS= read -r -d '' dir; do
-    PATHS+=("$dir")
-done < <(find /var/folders -maxdepth 4 -type d -name "com.tencent.qclaw.helper*" 2>/dev/null -print0)
+    if [ -z "${SEEN_PATHS[$dir]:-}" ]; then
+        PATHS+=("$dir")
+        SEEN_PATHS["$dir"]=1
+    fi
+done < <(find /var/folders -maxdepth 4 -type d \( -name "com.tencent.qclaw" -o -name "com.tencent.qclaw.*" \) 2>/dev/null -print0)
 
 # ---- 检测并展示发现的文件 ----
 FOUND_PATHS=()
@@ -123,10 +123,10 @@ fail_count=0
 for path in "${FOUND_PATHS[@]}"; do
     if rm -rf "$path" 2>/dev/null; then
         echo -e "  ${GREEN}✓${NC} 已删除: $path"
-        ((success_count++))
+        ((success_count++)) || true
     else
         echo -e "  ${RED}✗${NC} 删除失败（可能需要管理员权限）: $path"
-        ((fail_count++))
+        ((fail_count++)) || true
     fi
 done
 
