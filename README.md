@@ -4,9 +4,11 @@
 
 ## 📌 置顶更新
 
-> 根据社区反馈，目前 QClaw 临时阻断了当前版本直接调用无限量默认模型的 API，经尝试可通过**自定义模型**继续使用 OpenQClaw，测试确认可使用 **GLM-5、MiniMax M2.5、Qwen3.5** 等模型。
->
-> OpenQClaw 0.1.2 已完成维护，现已同步提供 **Apple Silicon (arm64)** 和 **Intel (x64)** 版本，并去除了启动时“发现新版本”弹窗的强制拦截逻辑；即使不更新，也可以继续使用。
+> 根据社区反馈，目前 QClaw 临时阻断了当前版本直接调用无限量默认模型的 API，经尝试可通过**自定义模型**继续使用 OpenQClaw。
+> 
+> OpenQClaw 0.1.2 现已同步提供 **Apple Silicon (arm64)** 和 **Intel (x64)** 版本，并去除了启动时的强制更新弹窗。
+> 
+> 💡 遇到"连接失败"、"403 报错"等问题，**请务必先查看：[👉 FAQ 常见问题解答](FAQ.md)**
 
 <p align="center">
   <img src="screenshots/openqclaw-agent-wechat-group-qrcode.png" width="260" alt="OpenQClaw Agent 微信交流群二维码" />
