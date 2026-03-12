@@ -4,6 +4,14 @@
 
 ## 📌 置顶更新
 
+> **🆕 已同步更新 0.1.4 版本，新增技能广场，完善侧边栏等功能，并修复部分已知问题。**
+
+<p align="center">
+  <img src="screenshots/0.1.4_hello.png" width="45%" alt="0.1.4 主界面" />
+  &nbsp;&nbsp;
+  <img src="screenshots/0.1.4_skillhub.png" width="45%" alt="0.1.4 技能广场" />
+</p>
+
 > 遇到连接失败 / 提示强制更新 / 更新后失效 / API 报错 403 / 微信远程控制失效等问题，**请查阅 [FAQ 常见问题解答](FAQ.md)**。
 >
 > QClaw 原版应用仍处于快速迭代阶段，目前功能尚不完善，存在较多已知问题。我们会持续跟进其更新，维护无需内测邀请码即可使用的 OpenQClaw，直到官方正式开放公测。
@@ -59,9 +67,9 @@
 ## 🚀 使用方法
 
 1. 从 [Releases](https://github.com/haroldneo/OpenQClaw/releases) 下载对应架构的安装包：
-   - Apple Silicon: `OpenQClaw-0.1.2-arm64.app.zip`
-   - Intel: `OpenQClaw-0.1.2-x64.app.zip`
-2. 解压后将 `OpenQClaw-0.1.2-*.app` 拖入 `/Applications`
+   - Apple Silicon: `OpenQClaw-0.1.4-arm64.app.zip`
+   - Intel: `OpenQClaw-0.1.4-x64.app.zip`
+2. 解压后将 `OpenQClaw-0.1.4-*.app` 拖入 `/Applications`
 3. 首次打开如遇安全提示，前往 **系统设置 → 隐私与安全性** 点击「仍要打开」
 4. 微信扫码登录，即可开始使用 🎉
 
