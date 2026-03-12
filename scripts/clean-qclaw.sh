@@ -32,11 +32,22 @@ PATHS=(
 
 # 动态路径（/var/folders 中的缓存目录，因用户不同路径会变化）
 # 搜索所有可能匹配的 QClaw 缓存目录（统一一次 find，避免重复匹配）
-declare -A SEEN_PATHS
+path_in_list() {
+    local candidate="$1"
+    local existing
+
+    for existing in "${PATHS[@]}"; do
+        if [ "$existing" = "$candidate" ]; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
 while IFS= read -r -d '' dir; do
-    if [ -z "${SEEN_PATHS[$dir]:-}" ]; then
+    if ! path_in_list "$dir"; then
         PATHS+=("$dir")
-        SEEN_PATHS["$dir"]=1
     fi
 done < <(find /var/folders -maxdepth 4 -type d \( -name "com.tencent.qclaw" -o -name "com.tencent.qclaw.*" \) 2>/dev/null -print0)
 
