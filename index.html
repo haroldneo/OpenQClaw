@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/openqclaw-favicon.png">
+    <title>OpenQClaw - 随时随地，微信一下，OpenQClaw帮你搞定一切</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --red-primary: #FF3B30;
+      --red-glow: #FF6B5E;
+      --gold-accent: #FFD700;
+      --bg-dark: #0A0A0F;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #F0F0F5;
+      --text-secondary: rgba(240,240,245,0.6);
+      --border-subtle: rgba(255,255,255,0.06);
+      --gradient-red: linear-gradient(135deg, #FF3B30, #FF6B5E);
+      --stack-gap: 34px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-dark); color: var(--text-primary);
+      font-family: 'Noto Sans SC', sans-serif;
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+    a, button, span, div, img { cursor: none; }
+
+    .cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--red-glow); border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid rgba(255,107,94,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transition: width 0.3s, height 0.3s, border-color 0.3s; }
+    .cursor-ring.hovering { width: 52px; height: 52px; border-color: rgba(255,107,94,0.8); }
+    .cursor-glow { position: fixed; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,59,48,0.06) 0%, transparent 70%); pointer-events: none; z-index: 0; transform: translate(-50%, -50%); }
+
+    #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .grid-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,59,48,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,59,48,0.02) 1px, transparent 1px); background-size: 60px 60px; }
+    .float-orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(80px); }
+    .orb-1 { width: 400px; height: 400px; background: rgba(255,59,48,0.06); top: 10%; left: 10%; animation: orbFloat1 20s ease-in-out infinite; }
+    .orb-2 { width: 350px; height: 350px; background: rgba(180,60,200,0.04); top: 60%; right: 5%; animation: orbFloat2 25s ease-in-out infinite; }
+    .orb-3 { width: 300px; height: 300px; background: rgba(255,100,50,0.05); bottom: 10%; left: 30%; animation: orbFloat3 18s ease-in-out infinite; }
+    @keyframes orbFloat1 { 0%,100% { transform: translate(0,0); } 33% { transform: translate(60px,-40px); } 66% { transform: translate(-30px,50px); } }
+    @keyframes orbFloat2 { 0%,100% { transform: translate(0,0); } 33% { transform: translate(-50px,30px); } 66% { transform: translate(40px,-60px); } }
+    @keyframes orbFloat3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(70px,-30px); } }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 60px; display: flex; align-items: center; gap: 0; background: rgba(10,10,15,0.7); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-subtle); transition: all 0.3s; }
+    nav.scrolled { background: rgba(10,10,15,0.92); padding: 12px 60px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); margin-right: 40px; }
+    .nav-logo-icon { width: 36px; height: 36px; border-radius: 10px; }
+    .nav-logo-text { font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 900; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      font-size: 16px; font-weight: 600;
+      transition: all 0.3s; position: relative;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover { color: #fff; text-shadow: 0 0 12px rgba(255,107,94,0.5); }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: -4px; left: 0; width: 0; height: 2px;
+      background: var(--gradient-red); transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-download-wrap { position: relative; margin-left: auto; flex-shrink: 0; }
+    .nav-cta { padding: 10px 28px; background: var(--gradient-red); border: none; border-radius: 10px; color: #fff; font-size: 15px; font-weight: 700; transition: transform 0.2s, box-shadow 0.2s; display: flex; align-items: center; justify-content: center; line-height: 1; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,59,48,0.4); }
+    .nav-dropdown { position: absolute; top: calc(100% + 10px); right: 0; background: rgba(20,20,28,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 8px; min-width: 210px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s ease; box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+    .nav-download-wrap:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown a, .nav-dropdown span { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 10px; color: var(--text-primary); text-decoration: none; font-size: 14px; font-weight: 600; transition: background 0.2s; }
+    .nav-dropdown a::after { display: none; }
+    .nav-dropdown a:hover { background: rgba(255,255,255,0.08); }
+    .nav-dropdown a + a, .nav-dropdown a + span { margin-top: 2px; }
+
+    .hero { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 40px 28px; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,59,48,0.1) 0%, transparent 70%); top: 0; left: 50%; transform: translateX(-50%); pointer-events: none; animation: pulseGlow 4s ease-in-out infinite; }
+    @keyframes pulseGlow { 0%,100% { opacity: 0.5; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.15); } }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; font-size: 13px; color: var(--text-secondary); font-weight: 500; margin-bottom: var(--stack-gap); animation: fadeInUp 0.8s ease-out; }
+    .hero-badge .qclaw-logo { width: 20px; height: 20px; border-radius: 5px; }
+    .hero-brand-lockup { display: flex; align-items: center; gap: 18px; margin-bottom: 40px; animation: fadeInUp 0.8s ease-out 0.1s both; }
+    .hero-brand-lockup img { width: clamp(120px, 14vw, 170px); height: auto; filter: drop-shadow(0 0 30px rgba(255,59,48,0.2)); }
+    .hero-brand-text { font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif; font-size: clamp(42px, 6vw, 84px); font-weight: 800; letter-spacing: 0.02em; line-height: 1; }
+
+    .hero-slogan {
+      font-size: clamp(17px, 2.2vw, 22px);
+      max-width: 640px; line-height: 1.8;
+      font-weight: 500;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), var(--red-glow), rgba(255,255,255,0.95));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-free-row {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 28px;
+      animation: fadeInUp 0.8s ease-out 0.35s both;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .hero-free-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 22px;
+      background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,59,48,0.08));
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 100px;
+      font-size: 14px; color: var(--gold-accent); font-weight: 600;
+    }
+    .hero-free-tag i { font-size: 16px; }
+
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: fadeInUp 0.8s ease-out 0.4s both; }
+    .btn-download { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; border-radius: 12px; font-size: 15px; font-weight: 700; transition: all 0.3s; text-decoration: none; border: none; }
+    .btn-mac, .btn-mac-intel, .btn-group {
+      background: #fff; color: #0A0A0F;
+    }
+    .btn-mac:hover, .btn-mac-intel:hover, .btn-group:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
+    .btn-win { background: #fff; color: #0A0A0F; }
+    .btn-icon-svg { width: 18px; height: 18px; display: block; fill: currentColor; flex-shrink: 0; }
+
+    .community-wrap { position: relative; display: inline-flex; }
+    .qr-popup {
+      position: absolute;
+      bottom: calc(100% + 12px); left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: rgba(20,20,28,0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 16px;
+      opacity: 0; visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      z-index: 10;
+      text-align: center;
+    }
+    .community-wrap:hover .qr-popup {
+      opacity: 1; visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .qr-popup img { width: 160px; height: auto; border-radius: 10px; background: #fff; }
+    .qr-popup::after {
+      content: ''; position: absolute;
+      bottom: -6px; left: 50%; transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid rgba(20,20,28,0.95);
+    }
+
+    .features-strip { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 1300px; margin: 0 auto; padding: 32px 40px 0; animation: fadeInUp 0.8s ease-out 0.55s both; }
+    .feature-card {
+      position: relative; padding: 28px 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      transition: all 0.5s; overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .feature-card::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,59,48,0.08), transparent 60%);
+      opacity: 0; transition: opacity 0.5s;
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-card::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--red-glow), transparent);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .feature-card:hover::after { opacity: 1; }
+    .feature-card:hover {
+      border-color: rgba(255,59,48,0.25);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(255,59,48,0.08), 0 0 30px rgba(255,59,48,0.04);
+    }
+    .feature-icon-wrap {
+      width: 50px; height: 50px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; font-size: 22px;
+      background: linear-gradient(135deg, rgba(255,59,48,0.12), rgba(255,100,80,0.04));
+      border: 1px solid rgba(255,59,48,0.1);
+      transition: all 0.4s;
+      position: relative; z-index: 1;
+    }
+    .feature-card:hover .feature-icon-wrap {
+      background: linear-gradient(135deg, rgba(255,59,48,0.25), rgba(255,100,80,0.1));
+      transform: scale(1.1) rotate(-3deg);
+      box-shadow: 0 4px 20px rgba(255,59,48,0.2);
+    }
+    .feature-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: #fff; position: relative; z-index: 1; }
+    .feature-card p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; position: relative; z-index: 1; }
+    .feature-tag { display: inline-block; margin-top: 10px; padding: 3px 10px; background: rgba(255,59,48,0.08); border: 1px solid rgba(255,59,48,0.12); border-radius: 6px; font-size: 11px; color: var(--red-glow); font-weight: 500; position: relative; z-index: 1; }
+
+    footer { position: relative; z-index: 2; padding: 34px 40px 28px; text-align: center; margin-top: var(--stack-gap); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 18px; }
+    .footer-brand img { width: 26px; height: 26px; border-radius: 6px; }
+    .footer-brand .footer-text-logo { font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: 0.02em; }
+    .footer-copyright { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--red-glow); }
+    .footer-links a::after { display: none; }
+    .footer-links span { color: rgba(255,255,255,0.15); }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1100px) { .features-strip { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 900px) {
+      body { cursor: auto; } .cursor-dot,.cursor-ring,.cursor-glow { display: none !important; }
+      nav { padding: 14px 24px; } .nav-links { display: none; }
+      .features-strip { grid-template-columns: repeat(2,1fr); gap: 10px; }
+      .hero { padding: 100px 24px 24px; }
+      footer { padding: 28px 24px 22px; }
+    }
+    @media (max-width: 600px) {
+      .features-strip { grid-template-columns: 1fr; padding: 24px 24px 0; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn-download, .community-wrap { width: 100%; max-width: 280px; justify-content: center; }
+      .hero-free-row { flex-direction: column; }
+      .hero-brand-lockup { flex-direction: column; gap: 14px; }
+    }
+    </style>
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="grid-bg"></div>
+<div class="float-orb orb-1"></div>
+<div class="float-orb orb-2"></div>
+<div class="float-orb orb-3"></div>
+<canvas id="particles-canvas"></canvas>
+
+<section class="hero" id="home">
+    <div class="hero-glow"></div>
+    <div class="hero-badge"><img src="images/qclaw-icon-badge.png" alt="QClaw" class="qclaw-logo">基于QClaw构建</div>
+    <div class="hero-brand-lockup">
+      <img src="images/openqclaw-icon-plain.png" alt="OpenQClaw">
+      <div class="hero-brand-text">OpenQClaw</div>
+    </div>
+    <p class="hero-slogan">无需内测邀请码，任何人即刻可用的 OpenQClaw</p>
+    <div class="hero-buttons" id="download">
+        <a href="https://github.com/haroldneo/OpenQClaw/releases/tag/v0.1.5" class="btn-download btn-mac"><i class="fa-brands fa-apple" style="font-size:18px;"></i> macOS (Apple 芯片)</a>
+        <a href="https://github.com/haroldneo/OpenQClaw/releases/tag/v0.1.5" class="btn-download btn-mac-intel"><i class="fa-brands fa-apple" style="font-size:18px;"></i> macOS (Intel 芯片)</a>
+        <a href="https://github.com/haroldneo/OpenQClaw/releases/tag/v0.1.5" class="btn-download btn-win"><i class="fa-brands fa-windows" style="font-size:18px;"></i> Windows</a>
+        <a href="https://x.com/har01dneo/" target="_blank" rel="noreferrer" class="btn-download btn-group">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="btn-icon-svg"><g><path d="M21.742 21.75l-7.563-11.179 7.056-8.321h-2.456l-5.691 6.714-4.54-6.714H2.359l7.29 10.776L2.25 21.75h2.456l6.035-7.118 4.818 7.118h6.191-.008zM7.739 3.818L18.81 20.182h-2.447L5.29 3.818h2.447z"></path></g></svg>
+            关注项目动态
+        </a>
+        <div class="community-wrap">
+            <button type="button" class="btn-download btn-group"><i class="fa-brands fa-weixin" style="font-size:18px;color:#07C160;"></i> 加入交流群</button>
+            <div class="qr-popup">
+                <img src="images/openqclaw-agent-wechat-group-qrcode.png" alt="OpenQClaw 微信交流群二维码">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features-strip" id="features">
+    <div class="feature-card"><div class="feature-icon-wrap"><i class="fa-solid fa-bolt-lightning"></i></div><h3>自动部署，打开即用</h3><p>支持 Mac & Windows，可接入 GLM、MiniMax、Qwen 等自定义模型</p><span class="feature-tag">开箱即用</span></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><i class="fa-solid fa-puzzle-piece"></i></div><h3>5000+ Skills 生态</h3><p>支持Skills市场，如ClawHub、GitHub 等丰富生态，Skills 随取随用</p><span class="feature-tag">丰富生态</span></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><i class="fa-solid fa-key"></i></div><h3>无需邀请码</h3><p>去除内测邀请码限制，持续跟进更新维护直到官方正式开放公测</p><span class="feature-tag">无需邀请</span></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span style="font-size:22px;">🦞</span></div><h3>持续记忆，你的专属龙虾</h3><p>记住偏好和上下文，持续成长，最懂你的 AI</p><span class="feature-tag">懂你所想</span></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><i class="fa-solid fa-shield-halved" style="color:#07C160;"></i></div><h3>本地部署，办公更高效</h3><p>直接操控文件、浏览器、邮件，不是只会聊天</p><span class="feature-tag">高效操控</span></div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand"><img src="images/openqclaw-icon-framed.png" alt="OpenQClaw"><span class="footer-text-logo">OpenQClaw</span></div>
+        <p class="footer-copyright">Copyright &copy; 2025 - 2026 <a href="https://github.com/haroldneo/OpenQClaw/" target="_blank" style="color:inherit;text-decoration:none;">OpenQClaw</a>. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="https://github.com/haroldneo/OpenQClaw" target="_blank">GitHub</a><span>|</span>
+            <a href="https://github.com/haroldneo/OpenQClaw/releases/" target="_blank">Releases</a><span>|</span>
+            <a href="https://github.com/haroldneo/OpenQClaw/blob/main/FAQ.md" target="_blank">FAQ</a><span>|</span>
+            <a href="https://github.com/haroldneo/OpenQClaw/blob/main/README.md#-license" target="_blank">License</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing'),glow=document.getElementById('cursorGlow');
+let mouseX=-100,mouseY=-100,ringX=-100,ringY=-100;
+document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;dot.style.left=(mouseX-4)+'px';dot.style.top=(mouseY-4)+'px';glow.style.left=mouseX+'px';glow.style.top=mouseY+'px';});
+document.querySelectorAll('a,button,.nav-cta,.btn-download,.feature-card,.community-wrap').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hovering'));el.addEventListener('mouseleave',()=>ring.classList.remove('hovering'));});
+function animC(){ringX+=(mouseX-ringX)*0.12;ringY+=(mouseY-ringY)*0.12;const rw=ring.classList.contains('hovering')?52:36;ring.style.left=(ringX-rw/2)+'px';ring.style.top=(ringY-rw/2)+'px';requestAnimationFrame(animC);}animC();
+window.addEventListener('scroll',()=>{const navbar=document.getElementById('navbar');if(navbar) navbar.classList.toggle('scrolled',window.scrollY>50);});
+
+const canvas=document.getElementById('particles-canvas'),ctx=canvas.getContext('2d');let particles=[];const PC=100,CD=140;
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}resize();window.addEventListener('resize',resize);
+class P{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-0.5)*0.4;this.vy=(Math.random()-0.5)*0.4;this.r=Math.random()*1.8+0.5;this.a=Math.random()*0.4+0.15;this.h=Math.random()>0.6?0:280;}
+    update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1;const dx=this.x-mouseX,dy=this.y-mouseY,d=Math.sqrt(dx*dx+dy*dy);if(d<180){const f=(180-d)/180;this.vx+=dx/d*f*0.015;this.vy+=dy/d*f*0.015;}this.vx*=0.999;this.vy*=0.999;}
+    draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.h===0?`rgba(255,59,48,${this.a})`:`rgba(180,60,200,${this.a*0.6})`;ctx.fill();}}
+for(let i=0;i<PC;i++)particles.push(new P());
+function animP(){ctx.clearRect(0,0,canvas.width,canvas.height);for(let i=0;i<particles.length;i++){particles[i].update();particles[i].draw();for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<CD){const a=(1-d/CD)*0.1;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(255,107,94,${a})`;ctx.lineWidth=0.5;ctx.stroke();}}}requestAnimationFrame(animP);}animP();
+</script>
+</body>
+</html>
