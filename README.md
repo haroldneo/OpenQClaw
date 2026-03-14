@@ -1,4 +1,8 @@
-# 🦞 OpenQClaw
+<p align="center">
+  <a href="https://haroldneo.github.io/OpenQClaw/">
+    <img src="img/website.png" alt="OpenQClaw 官网" />
+  </a>
+</p>
 
 > QClaw 今日开放限量内测，OpenQClaw 去除了其内测邀请码限制，现在任何人都可以直接使用微信和 QClaw 聊天啦
 

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenQClaw | GitHub Pages 项目介绍页</title>
+  <meta
+    name="description"
+    content="OpenQClaw 项目介绍页，包含最新 Release 下载、功能亮点、上手步骤、截图展示与 FAQ 入口。"
+  >
+  <link rel="icon" href="assets/branding/openqclaw-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="assets/styles.css">
+  <script type="module" src="assets/main.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
+    <div class="grid-overlay"></div>
+
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="OpenQClaw 首页">
+        <img src="assets/branding/openqclaw-mark.svg" alt="OpenQClaw 图标" class="brand-mark">
+        <img src="assets/branding/openqclaw-wordmark.svg" alt="OpenQClaw" class="brand-wordmark">
+      </a>
+
+      <nav class="site-nav" aria-label="站点导航">
+        <a href="#highlights">亮点</a>
+        <a href="#how">上手</a>
+        <a href="#showcase">展示</a>
+        <a href="#resources">资源</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-link" href="https://github.com/haroldneo/OpenQClaw" target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+        <div class="download-menu">
+          <button class="button button-primary" type="button" aria-haspopup="true" aria-expanded="false">
+            立即下载
+          </button>
+          <div class="download-dropdown">
+            <a
+              href="https://github.com/haroldneo/OpenQClaw/releases/download/v0.1.4/OpenQClaw-0.1.4-arm64.app.zip"
+              data-asset="arm64"
+              data-release-link
+            >
+              macOS Apple Silicon
+            </a>
+            <a
+              href="https://github.com/haroldneo/OpenQClaw/releases/download/v0.1.4/OpenQClaw-0.1.4-x64.app.zip"
+              data-asset="x64"
+              data-release-link
+            >
+              macOS Intel
+            </a>
+            <a
+              href="https://github.com/haroldneo/OpenQClaw/releases/latest"
+              data-release-page
+              target="_blank"
+              rel="noreferrer"
+            >
+              查看全部 Release
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <div class="hero-copy">
+          <div class="hero-badge">
+            <img src="assets/branding/openqclaw-mark.svg" alt="OpenQClaw 标识" class="hero-badge-mark">
+            <span>基于 QClaw 构建</span>
+          </div>
+
+          <img
+            src="assets/branding/openqclaw-lockup.svg"
+            alt="OpenQClaw"
+            class="hero-lockup"
+          >
+
+          <p class="hero-lead">
+            OpenQClaw 的 GitHub Pages 项目介绍页，保留原站的节奏感与下载导向，
+            但内容与实现全部改为面向当前仓库的原创版本。
+          </p>
+
+          <div class="release-bar">
+            <div class="release-pill">
+              <span class="release-label">LATEST RELEASE</span>
+              <strong data-release-version>v0.1.4</strong>
+            </div>
+            <div class="release-meta">
+              <span>发布日期</span>
+              <strong data-release-date>2026-03-12</strong>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <div class="download-menu hero-download">
+              <button class="button button-primary" type="button" aria-haspopup="true" aria-expanded="false">
+                下载 macOS 版本
+              </button>
+              <div class="download-dropdown">
+                <a
+                  href="https://github.com/haroldneo/OpenQClaw/releases/download/v0.1.4/OpenQClaw-0.1.4-arm64.app.zip"
+                  data-asset="arm64"
+                  data-release-link
+                >
+                  Apple Silicon
+                </a>
+                <a
+                  href="https://github.com/haroldneo/OpenQClaw/releases/download/v0.1.4/OpenQClaw-0.1.4-x64.app.zip"
+                  data-asset="x64"
+                  data-release-link
+                >
+                  Intel
+                </a>
+              </div>
+            </div>
+            <a
+              class="button button-secondary"
+              href="https://github.com/haroldneo/OpenQClaw/releases/latest"
+              data-release-page
+              target="_blank"
+              rel="noreferrer"
+            >
+              查看最新 Release
+            </a>
+          </div>
+
+          <div class="hero-notes">
+            <article>
+              <span class="note-label">当前重点</span>
+              <strong>0.1.4 已同步技能广场与侧边栏更新</strong>
+            </article>
+            <article>
+              <span class="note-label">下载方式</span>
+              <strong>按钮会自动指向 GitHub 最新发布资源</strong>
+            </article>
+            <article>
+              <span class="note-label">已知状态</span>
+              <strong>微信远程控制暂不可用，桌面端功能可继续体验</strong>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card hero-card-large">
+            <div class="card-head">
+              <span>主界面</span>
+              <span>OpenQClaw 0.1.4</span>
+            </div>
+            <img src="assets/screenshots/0.1.4_hello.png" alt="OpenQClaw 0.1.4 主界面截图">
+          </div>
+          <div class="hero-card hero-card-small">
+            <div class="card-head">
+              <span>技能广场</span>
+              <span>Skill Hub</span>
+            </div>
+            <img src="assets/screenshots/0.1.4_skillhub.png" alt="OpenQClaw 技能广场截图">
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-section" id="highlights">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Highlights</span>
+          <h2>围绕当前仓库状态重新组织的项目亮点</h2>
+          <p>
+            不直接照搬第三方文案，改为突出 OpenQClaw 目前已经验证过、并且和仓库内容一致的能力与说明。
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <span class="feature-tag">No Invite</span>
+            <h3>去除邀请码门槛</h3>
+            <p>打开应用即可进入主界面，不再卡在前端邀请码校验流程。</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <span class="feature-tag">Custom Models</span>
+            <h3>自定义模型可继续使用</h3>
+            <p>README 与 FAQ 中已有实际可行方案，可接入 GLM、MiniMax、Qwen 等模型继续使用。</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <span class="feature-tag">Skill Hub</span>
+            <h3>已同步 0.1.4 新界面</h3>
+            <p>技能广场与侧边栏更新已纳入介绍页视觉主图，方便直接对齐当前版本能力。</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <span class="feature-tag">Troubleshooting</span>
+            <h3>故障恢复路径完整</h3>
+            <p>常见的强更覆盖、缓存残留和 403 场景都有现成 FAQ 与清理脚本兜底。</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <span class="feature-tag">GitHub Ready</span>
+            <h3>面向 GitHub Pages 部署</h3>
+            <p>纯静态目录结构，无需构建步骤，放到仓库中即可作为项目介绍页继续微调。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="workflow-section" id="how">
+        <div class="section-heading reveal">
+          <span class="eyebrow">How It Works</span>
+          <h2>三步开始使用 OpenQClaw</h2>
+          <p>下载、放入应用目录、按提示完成首次打开与排查，即可快速进入当前可用功能。</p>
+        </div>
+
+        <div class="steps">
+          <article class="step-card reveal">
+            <span class="step-index">01</span>
+            <h3>下载对应架构版本</h3>
+            <p>Apple Silicon 与 Intel 链接会自动读取 GitHub 最新 Release 资源。</p>
+          </article>
+
+          <article class="step-card reveal">
+            <span class="step-index">02</span>
+            <h3>拖入 `/Applications`</h3>
+            <p>首次打开如果出现安全提示，前往系统设置里的隐私与安全性选择“仍要打开”。</p>
+          </article>
+
+          <article class="step-card reveal">
+            <span class="step-index">03</span>
+            <h3>优先参考 FAQ 排障</h3>
+            <p>遇到缓存残留、更新覆盖或 API 403 时，直接按照仓库 FAQ 与清理脚本处理。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="showcase-section" id="showcase">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Showcase</span>
+          <h2>直接来自仓库素材的使用展示</h2>
+          <p>选用现有截图与二维码资源，避免再引入第三方站点图片，同时保证介绍页和仓库内容一致。</p>
+        </div>
+
+        <div class="showcase-grid">
+          <article class="showcase-card reveal">
+            <div class="showcase-copy">
+              <span class="showcase-label">Before / After</span>
+              <h3>入口状态对比</h3>
+              <p>把“原版拦截”和“OpenQClaw 可直接进入”的差异直接可视化，方便新访客快速理解项目用途。</p>
+            </div>
+            <div class="comparison-grid">
+              <figure>
+                <img src="assets/screenshots/before.png" alt="邀请码拦截界面">
+                <figcaption>原始拦截界面</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/screenshots/after.png" alt="OpenQClaw 可直接进入界面">
+                <figcaption>OpenQClaw 直接进入</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="showcase-card reveal">
+            <div class="showcase-copy">
+              <span class="showcase-label">Model Setup</span>
+              <h3>自定义模型设置与聊天效果</h3>
+              <p>把 FAQ 中“可继续使用”的信息具体化，用设置页、模型列表和聊天效果三张图串起来。</p>
+            </div>
+            <div class="triple-grid">
+              <img src="assets/screenshots/custom-model-settings.png" alt="自定义模型设置页">
+              <img src="assets/screenshots/custom-model-list.png" alt="可用模型列表">
+              <img src="assets/screenshots/custom-model-chat.png" alt="自定义模型聊天效果">
+            </div>
+          </article>
+
+          <article class="showcase-card reveal">
+            <div class="showcase-copy">
+              <span class="showcase-label">Recovery</span>
+              <h3>清理脚本作为恢复入口</h3>
+              <p>如果本地残留配置导致异常，项目已经提供现成脚本，适合放在介绍页里作为常见问题兜底入口。</p>
+            </div>
+            <div class="single-shot">
+              <img src="assets/screenshots/clean-script-demo.png" alt="清理脚本运行演示">
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="status-section reveal">
+        <div class="status-card">
+          <span class="eyebrow">Current Status</span>
+          <h2>当前版本介绍页明确保留了一条状态说明</h2>
+          <p>
+            根据仓库 FAQ，微信远程控制相关服务端校验已经收紧，因此本页没有继续放大这一能力，
+            而是把重点放在桌面端可用功能、自定义模型与版本下载上。
+          </p>
+        </div>
+      </section>
+
+      <section class="resources-section" id="resources">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Resources</span>
+          <h2>把仓库入口集中到一屏里</h2>
+          <p>页脚和资源区统一改成 OpenQClaw 项目链接，不保留 Tencent 相关字样。</p>
+        </div>
+
+        <div class="resource-grid">
+          <a class="resource-card reveal" href="https://github.com/haroldneo/OpenQClaw" target="_blank" rel="noreferrer">
+            <span>项目主页</span>
+            <strong>OpenQClaw</strong>
+            <p>查看 README、提交记录与完整仓库结构。</p>
+          </a>
+
+          <a class="resource-card reveal" href="https://github.com/haroldneo/OpenQClaw/releases/latest" data-release-page target="_blank" rel="noreferrer">
+            <span>最新发布</span>
+            <strong data-release-version>v0.1.4</strong>
+            <p>始终跳转到 GitHub 最新 Release 页面。</p>
+          </a>
+
+          <a class="resource-card reveal" href="https://github.com/haroldneo/OpenQClaw/blob/main/FAQ.md" target="_blank" rel="noreferrer">
+            <span>常见问题</span>
+            <strong>FAQ</strong>
+            <p>连接失败、强更覆盖、403 与远控状态都已整理。</p>
+          </a>
+
+          <a class="resource-card reveal" href="https://github.com/haroldneo/OpenQClaw/blob/main/README.md#-license" target="_blank" rel="noreferrer">
+            <span>开源协议</span>
+            <strong>MIT</strong>
+            <p>介绍页沿用项目本身的协议说明与公开仓库入口。</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="cta-section reveal">
+        <div class="cta-copy">
+          <div class="hero-badge">
+            <img src="assets/branding/openqclaw-mark.svg" alt="OpenQClaw 标识" class="hero-badge-mark">
+            <span>OpenQClaw 项目介绍页</span>
+          </div>
+          <h2>准备先在本地看效果，再继续细调细节</h2>
+          <p>
+            现在这个 `web/` 目录已经可以作为 GitHub Pages 静态页基础版本继续改，
+            后面你想换字图、替换 CTA、补充更多场景，我都可以直接在这套结构上继续迭代。
+          </p>
+          <div class="hero-actions">
+            <div class="download-menu hero-download">
+              <button class="button button-primary" type="button" aria-haspopup="true" aria-expanded="false">
+                下载最新版本
+              </button>
+              <div class="download-dropdown">
+                <a
+                  href="https://github.com/haroldneo/OpenQClaw/releases/download/v0.1.4/OpenQClaw-0.1.4-arm64.app.zip"
+                  data-asset="arm64"
+                  data-release-link
+                >
+                  Apple Silicon
+                </a>
+                <a
+                  href="https://github.com/haroldneo/OpenQClaw/releases/download/v0.1.4/OpenQClaw-0.1.4-x64.app.zip"
+                  data-asset="x64"
+                  data-release-link
+                >
+                  Intel
+                </a>
+              </div>
+            </div>
+            <a
+              class="button button-secondary"
+              href="https://github.com/haroldneo/OpenQClaw/releases/latest"
+              data-release-page
+              target="_blank"
+              rel="noreferrer"
+            >
+              打开 Release 页面
+            </a>
+          </div>
+        </div>
+
+        <aside class="cta-side">
+          <figure class="qr-card">
+            <img src="assets/screenshots/openqclaw-agent-wechat-group-qrcode.png" alt="OpenQClaw 微信交流群二维码">
+            <figcaption>项目交流群二维码</figcaption>
+          </figure>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img src="assets/branding/openqclaw-mark.svg" alt="OpenQClaw 图标" class="brand-mark">
+        <img src="assets/branding/openqclaw-wordmark.svg" alt="OpenQClaw" class="brand-wordmark">
+      </div>
+      <p class="footer-copy">
+        Copyright <span data-current-year>2026</span> OpenQClaw. Project introduction page for GitHub hosting.
+      </p>
+      <div class="footer-links">
+        <a href="https://github.com/haroldneo/OpenQClaw" target="_blank" rel="noreferrer">OpenQClaw</a>
+        <span>|</span>
+        <a href="https://github.com/haroldneo/OpenQClaw/releases/latest" data-release-page target="_blank" rel="noreferrer">最新发布</a>
+        <span>|</span>
+        <a href="https://github.com/haroldneo/OpenQClaw/blob/main/FAQ.md" target="_blank" rel="noreferrer">FAQ</a>
+        <span>|</span>
+        <a href="https://github.com/haroldneo/OpenQClaw/blob/main/README.md#-license" target="_blank" rel="noreferrer">License</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

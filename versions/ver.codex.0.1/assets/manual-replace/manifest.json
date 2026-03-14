@@ -1,0 +1,20 @@
+{
+  "sourceSite": "https://claw.guanjia.qq.com/",
+  "manualReplaceTargets": [
+    {
+      "sourceAssetName": "images/logo.png",
+      "currentTarget": "web/assets/branding/openqclaw-mark.svg",
+      "purpose": "导航、页脚和徽标位置的小图标"
+    },
+    {
+      "sourceAssetName": "images/logo-text.png",
+      "currentTarget": "web/assets/branding/openqclaw-wordmark.svg",
+      "purpose": "导航与页脚的文字标识"
+    },
+    {
+      "sourceAssetName": "images/logo-combined.png",
+      "currentTarget": "web/assets/branding/openqclaw-lockup.svg",
+      "purpose": "首屏主视觉字图合体"
+    }
+  ]
+}
